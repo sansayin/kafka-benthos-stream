@@ -1,0 +1,44 @@
+
+http:
+  enabled: false 
+input:
+  kafka:
+    addresses: 
+      - 127.0.0.1:9092
+    consumer_group: "group_topic1"
+    topics:
+      - topic1
+pipeline:
+  threads: 2 
+    #parallel:
+  #   cap: 0
+  #   processors: []
+  processors:
+    # - schema_registry_encode:
+    #     url: http://127.0.0.1:8081
+    #     subject: topic1
+    #     refresh_period: 15s
+
+    # - catch:
+    #   - log:
+    #       level: ERROR
+    #       message: ${! error() }
+    #   - bloblang: root = deleted()
+
+    - bloblang: |
+        let bleached = content().bleach().parse_json()
+        root = $bleached
+
+    - log:
+         level: INFO
+         message: '${! content() }'
+         fields_mapping: |
+           root.kafka_key = meta("kafka_key")
+
+output:
+  kafka:
+    addresses: [ 127.0.0.1:9092 ]
+    topic: topic2
+    key: ${! meta("kafka_key") }
+
+

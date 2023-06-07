@@ -1,0 +1,50 @@
+{
+    "type": "record",
+    "name": "RedPanda",
+    "fields": [
+        {
+            "name": "Date",
+            "type": "string"
+        },
+        {
+            "name": "Open",
+            "type": "double"
+        },
+        {
+            "name": "Close",
+            "type": "double",
+            "default": 0
+        },
+        {
+            "name": "High",
+            "type": "double",
+            "default": 0
+        },
+        {
+            "name": "Low",
+            "type": "double",
+            "default": 0
+        },
+        {
+            "name": "Volume",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "Dividends",
+            "type": "double",
+            "default": 0
+        },
+        {
+            "name": "StockSplits",
+            "type": "double",
+            "default": 0
+        },
+        {
+            "name": "CapitalGains",
+            "type": "double",
+            "default": 0
+        }
+    ]
+}
+
